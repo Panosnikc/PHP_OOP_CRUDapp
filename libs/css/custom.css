@@ -1,0 +1,296 @@
+
+    body {
+      font-family: "Times New Roman", Times, serif;
+      background: #fff;
+      margin: 0;
+    }
+    
+    * {
+	  box-sizing: border-box;
+	  -webkit-box-sizing: border-box; /* To support older versions of Safari (< 5.1), Chrome (< 10) */
+	  -moz-box-sizing: border-box; /* To support older Firefox (< 29) version  */
+	}
+    
+    
+    /* header class  */
+    .header {
+      overflow: hidden;
+      background: white;      
+    }
+    
+    .header-inner {
+        overflow: hidden;
+        width: 75%;
+        margin: auto;
+        padding: 20px 0px;
+        
+    }
+     
+    
+    .header-inner a {
+      float: left;
+      color: black;
+      text-align: center;
+      padding: 8px;
+      text-decoration: none;
+      font-size: 16px; 
+      line-height: 25px;
+      border-radius: 4px;
+      margin: 2px 4px;
+      
+    }
+    
+    .header-logo {float:left;}
+    
+    .header-logo a {
+      font-size: 25px;
+      font-weight: bold;
+    }
+    
+    .header a.active {
+      background-color: rgb(109, 122, 134);
+      color: white;
+    }
+    
+    .header-right {
+      float: right;
+      
+    }
+    
+    .header-right a {
+       border: 1px solid black;
+    }
+    
+    .header-right a:hover {
+      
+      border-style: solid;
+      box-shadow: 1px 1px black;
+    }
+      
+    .header-nav {
+      background-color: #53535f;
+      overflow: hidden;
+      
+      }
+     
+    .header-nav-nav {
+      width: 73%;
+        margin: auto;
+        overflow: hidden;
+    }
+      
+    .header-nav a {
+      
+        color: white;
+        text-decoration: none;
+        float:left; 
+        padding: 8px;
+        float: left;
+        text-align: center;
+        font-size: 17px;
+        
+    }
+    
+    .header-nav a:hover {
+        background: #5f5f6d;
+    }
+        
+    /* .content */
+    .content {
+      max-width: 600px;
+      margin: auto;
+      background-color: rgb(255, 255, 255);
+      padding: 10px;
+      margin-top: 12px;
+    }
+    
+    /* This media screen work when the page width is less than 684px
+     * and change the header properties 
+     */
+    /* Media screen */
+    @media screen and (max-width: 684px) {
+    
+    
+    .header-inner {
+        width: 100%;
+        border: 1px solid blue; 
+    }
+     
+    .header-right a, .header-logo a {
+        
+      float: right;
+      color: black;
+      text-align: center;
+      padding: 8px;
+      text-decoration: none;
+      font-size: 14px; 
+      border: none; 
+      margin: 0px;
+      
+      }
+     
+    .header-right a:hover {
+        border: none;
+        box-shadow: none;
+        
+      }
+    
+    .header-nav a {
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        font-size: 14px;
+      }
+      
+    .header-nav-nav {
+      width: 100%;  
+      overflow: hidden;
+    }
+      
+      .header-right {
+        float: none;
+      }
+  }
+       
+    /* Remove the markers/bullets */ 
+    ul {
+      list-style-type: none;
+      margin:0 ;
+      padding: 0 ;
+    }
+    
+    /***************************************/
+    
+    /* Clearfix: Clear Floats
+      Elements after a floating element will flow around it. 
+      Use the "clearfix" hack to fix the problem
+    */
+
+    .clearfix {
+       /*border: 3px solid #4CAF50; */ /* green */
+       border: 1px solid #a6a6a6;
+       box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.6);
+       margin: 8px;
+       border-radius: 4px;
+    } 
+    
+    .clearfix:hover {
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.9);
+      margin: 8px;
+    }
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+      
+    }
+    
+    .clearfix a {text-decoration: none;}
+   
+    /* List result header */
+    .list-result-header {
+      margin-top: 6px;
+      margin-bottom: 4px;
+      float: left;
+      font-size:18px;
+      padding-left: 4px;
+      width: 400px;
+      color: #307f9c;
+    }
+    
+    /* Location */
+    .list-location {
+        /*float: left;*/
+        margin: 0px 0px 4px 0px;
+        padding-left: 6px;
+        color: #4d4d4d;
+        font-weight: bold;
+    }
+    
+    /* Price */
+    .list-price {
+      margin-top: 6px;
+      float: right;
+      font-size: 18px;
+      padding-right: 10px;
+      margin-left: 4px;
+      color: #307f9c;
+      margin-bottom: 4px;
+    }
+    
+    /* List image */
+    .list-img {
+      /*border:1px solid blue;*/
+        position: relative;
+        float: left;
+        margin-bottom: 16px;
+        padding-left: 8px;
+    }
+    
+    /* List content */
+    .list-content {padding: 0px;}
+
+    
+    /* Text content */
+    div.list-content-text {
+      overflow: hidden;
+      /*border: 1px solid #000000; */ /* black */
+      padding: 0px 10px 10px; 
+      line-height: 1.6;
+      margin-top: 0px;
+    }
+    
+    /* Lines/hr blue */
+    .list-hr {
+      border-top: 2px solid #07b7df;
+        border-bottom: 2px solid #07b7df;
+        padding-bottom: 4px;
+        
+    }
+    
+    
+    .description {
+        margin-top: 0px;
+        color: #333333;
+        
+    }
+    
+    
+    .list-publish-date {
+      padding-top: 10px;
+        margin-top: 9px;
+        color: #404040;
+        font-weight: bold;
+    }
+    
+    /* Custom default Button */
+    .mybtn {
+      border: none;
+      color: white;
+      padding: 14px 28px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    /* List-btns */
+    .list-btns {padding: 6px 16px;}
+    
+    /* Buttons for read/Edit/delete */
+    .list-btn {
+      color: #3480DB;
+        padding: 0px 16px;
+        font-size: 16px;  
+    }
+    
+    .list-btn:hover {text-decoration: underline;}
+    
+    .danger {background-color: #f44336;} /* Red */ 
+    .danger:hover {
+      background: #da190b;
+      color: white;
+    }
+    
+  
+    
+    
+    

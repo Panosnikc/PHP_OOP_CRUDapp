@@ -1,0 +1,98 @@
+<?php
+// Inlcude DB and objects files/Classes (where can be DB connect, class User, Class Category etc.)
+include_once "config/Database.php";
+include_once "objects/Property.php";
+include_once "objects/PropertyType.php";
+
+// Instantiate DB & connect
+$database = new Database();
+$db = $database->connect();
+
+// Instantiate Products/property & PropertyType objects
+$property = new Property($db);
+$property_type = new PropertyType($db);
+
+// Query property/properties, Blog property query
+// OR $result = $property->readALL();
+$stmt = $property->readAll();
+
+// Get row count
+// OR $num = $result->rowCount();
+$num = $stmt->rowCount();
+
+// Set page title and include header_layout.php
+$page_title = "Read Properties";
+include_once "header_layout2.php";
+
+
+/****************************** */
+
+if($num > 1) {
+
+
+  echo '<div class="content">';
+
+  While($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+    extract($row);
+      
+      echo '<div class="clearfix" style="width:510px;margin:auto;margin-bottom:20px;margin-top:20px;" id="clearfix">';
+        echo "<a href='read-ad.php?property_id={$property_id}' style=''>";
+        
+        echo '<div style="overflow:hidden;margin-bottom:4px;">';
+
+            echo "<h2 class='list-result-header' style='' >". ucfirst($title) . "</h2>";
+            echo "<h2 class='list-price' style=''>&#163;{$price}pcm</h2>";
+            echo '<div class="" style="float:left;width:100%;">';
+			
+            echo "<i class='list-location' style=''>" . strtoupper($postcode) . ", &nbsp" . ucfirst($city) . "</i>".
+				"</div>";
+         echo '</div>';
+        
+        echo '<div class="list-img" style="">';
+          echo '<img class="" style="" src="double-room.jpg" alt="No photos" width="120" height="120"	height="auto"  />';
+        echo "</div>";
+          
+          
+        echo '<div class="list-content" style="margin-left:134px;margin-right:10px;">';
+          
+          echo '<div class="list-hr" style="">';
+            echo '<div class="list-content-text" style="height:70px;">';
+              echo '<p class="description">';
+                echo ucfirst($description);
+              echo '</p>';
+            echo "</div>";
+          
+            echo '<div style="padding-left:10px;" class="list-publish-date">';
+			
+			// availableDate format and display
+			$availableDate = DateTime::createFromFormat('Y-m-d', $available_from);
+			$availableDateFormat =  $availableDate->format("d F");
+			
+			
+			// created_at format and display
+			$createdDate = DateTime::createFromFormat('Y-m-d H:i:s', $created_at);
+			$createdDateFormat =  $createdDate->format("d F Y");
+
+                echo "<i>Posted {$createdDateFormat} | &nbsp; Available " . $availableDateFormat . "</i>";
+            echo "</div>";
+        echo "</div>"; // End of list-content              
+        echo '<div class="list-btns" style="padding-left:0px;">';
+          echo "<a href='read-ad.php?property_id={$property_id}' class='list-btn'>Read</a>";
+          echo "<a href='update-ad.php?property_id={$property_id}' class='list-btn' style='margin-left:24px;'>Edit</a>";
+          echo "<a href='delete-ad.php?property_id={$property_id}' class='mybtn danger' style='margin-left:24px;padding:2px 16px ;'>Delete</a>";
+        echo "</div>";
+          
+        echo "</div>"; //
+
+       echo "</a>";
+      echo "</div>";
+  } // End while
+
+  echo "</div>"; // End container
+
+} 
+
+// Include footer page
+include_once "footer_layout.php";
+?>
