@@ -1,6 +1,7 @@
 # PHP_OOP_CRUDapp
 
 This is a simple PHP OOP CRUD app from scratch.
+With some Front End on index page which need more work but for now i don't have time.
 
 # Quick Start
 To run this project in your pc you will need:
