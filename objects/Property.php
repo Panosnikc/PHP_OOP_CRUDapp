@@ -24,45 +24,7 @@
         $this->conn = $db;
     }
 
-
-    // create product 
-    function acreate() { 
-        // Create query
-        $query = "INSERT INTO
-                    " . $this->table_name . "
-                SET
-                    title=:title, 
-                    price=:price, 
-                    description=:description, 
-                    property_type_id=:property_type_id, 
-                    postcode=:postcode";
- 
-        $stmt = $this->conn->prepare($query);
- 
-        // posted values
-        $this->title = htmlspecialchars(strip_tags($this->title));
-        $this->price = htmlspecialchars(strip_tags($this->price));
-        $this->description = htmlspecialchars(strip_tags($this->description));
-        $this->property_type_id = htmlspecialchars(strip_tags($this->property_type_id));
-        $this->postcode = htmlspecialchars(strip_tags($this->postcode));
-
-        // bind values 
-        $stmt->bindParam(":title", $this->title);
-        $stmt->bindParam(":price", $this->price);
-        $stmt->bindParam(":description", $this->description);
-        $stmt->bindParam(":property_type_id", $this->property_type_id);
-        $stmt->bindParam(":postcode", $this->postcode);
- 
-        if($stmt->execute()){
-            return true;
-        }else{
-            return false;
-        }
- 
-    }
-
-    
-    // Create Post
+    // Create Record/Post
      function create() {
         // Create query
         $query = "INSERT INTO
@@ -105,8 +67,9 @@
 
          // Attempt to execute the prepared statement
          if($stmt->execute()) {
-          return true; 
-        } else{
+        //   return true; 
+            header("Location:index.php?msg_create=create");
+        } else {
             return false;
         }
 
@@ -167,7 +130,6 @@
 
     } 
 
-
     // Method readSingle()
     public function readSingle() {
         // Create query
@@ -216,8 +178,8 @@
 
     } // End of fuction readSingle() 
 
-    /* Method readALL()  */
-    public function readALL() {
+    /* Method readAll()  */
+    public function readAll() {
         // Create query
         $query = "SELECT 
             t.name as property_type_id, 
@@ -247,28 +209,40 @@
         return $stmt;
     } 
 
-
+  
     /* Method delete() */ 
-    public function deletew() {
-        // Create query
-        $query = "DELETE 
-                FROM " . $this->table_name . " 
-                WHERE property_id = :property_id";
-               
-
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
-
-		$stmt->bindParam(':property_id', $this->property_id);
-
-        // Execute query
-        if($stmt->execute()) {
-            return true;
-        } else{
-            return false;
+    // delete funtion
+    //  https://www.webscodex.com/2020/10/php-crud-add-edit-delete-view.html 
+    public function deleteRecord($id) {
+        $query = "DELETE FROM " . $this->table_name . " WHERE property_id = '$id'";
+        $stmt = $this->conn->query($query);
+        if ($stmt == true) {
+            header("Location:index.php?msg_delete=delete"); // Location:index.php?msg3=delete
+        } else {
+            echo "Record does not delete try again";
         }
+    }
 
-
-    } 
-
+    // delete 2
+    public function deleteRecord2($id) {
+        $query = "DELETE FROM " . $this->table_name . " WHERE property_id = '$id'";
+        
+        if($stmt = $this->conn->prepare($query)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(1, $id);
+            
+            // Set parameters
+            //$param_id = trim($_POST["id"]);
+            
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // Records deleted successfully. Redirect to landing page
+                header("Location:index.php?msg3=delete");
+                exit();
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+    }
+}
 ?>

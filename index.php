@@ -21,17 +21,36 @@ $stmt = $property->readAll();
 $num = $stmt->rowCount();
 
 // Set page title and include header_layout.php
-$page_title = "Read Properties";
-include_once "header_layout2.php";
+$page_title = "Properties";
+include_once "index_header_layout.php";
 
+  // Delete record from table
+  if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
+    $deleteId = $_GET['deleteId'];
+    $property->deleteRecord($deleteId);
+  }
 
 /****************************** */
 
 if($num > 1) {
 
-
   echo '<div class="content">';
 
+  // messages
+
+    if (isset($_GET['msg_create']) == "create") {
+      echo "<div class='alert alert-success alert-dismissible' style='width:510px;margin:auto;margin-bottom:20px;margin-top:20px;'>
+              <button type='button' class='close' data-dismiss='alert'>&times;</button>
+              AD created successfully.
+            </div>";
+    }
+
+    if (isset($_GET['msg_delete']) == "delete") {
+      echo "<div class='alert alert-success alert-dismissible' style='width:510px;margin:auto;margin-bottom:20px;margin-top:20px;'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+            AD deleted successfully.
+          </div>";  
+    }          
   While($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
     extract($row);
@@ -80,10 +99,12 @@ if($num > 1) {
         echo '<div class="list-btns" style="padding-left:0px;">';
           echo "<a href='read-ad.php?property_id={$property_id}' class='list-btn'>Read</a>";
           echo "<a href='update-ad.php?property_id={$property_id}' class='list-btn' style='margin-left:24px;'>Edit</a>";
-          echo "<a href='delete-ad.php?property_id={$property_id}' class='mybtn danger' style='margin-left:24px;padding:2px 16px ;'>Delete</a>";
-        echo "</div>";
-          
-        echo "</div>"; //
+          ?>
+          <a href="index.php?deleteId=<?php echo $property_id?>" class='mybtn danger' style='margin-left:24px;padding:2px 16px ;' onclick="return confirm('Are you sure want to delete this record')">delete</a>         
+        <?php
+          echo "</div>";
+        // --
+        echo "</div>"; 
 
        echo "</a>";
       echo "</div>";

@@ -30,7 +30,7 @@ include_once "header_layout.php";
 
 // Create a button that return back to index.php 
 echo "<div class='right-button-margin' style=''>";
-    echo "<a href='index.php' class='btn btn-outline-primary '>Read Products</a>";
+    echo "<a href='index.php' class='btn btn-outline-primary '>Home</a>";
 echo "</div>";
 
 
